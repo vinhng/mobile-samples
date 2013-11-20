@@ -116,6 +116,7 @@ DEPENDENCIES
   calabash-android
   calabash-cucumber
   cucumber
+  geocoder
   pry
   rake
   rspec

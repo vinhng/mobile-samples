@@ -23,6 +23,12 @@ def get_env(key)
   val
 end
 
+# Specify the device to use (in case there are multiple devices attached to computer)
+#set_env(:adb_device_arg, '192.168.56.101:5555') # Genymotion, Galaxy S4 w/Android 4.2.2
+#set_env(:adb_device_arg, 'HT9CXP812164')        # Hardware, Nexus One
+#set_env(:adb_device_arg, '0149B2EC03012005')    # Hardware, Galaxy Nexus
+set_env(:adb_device_arg, '192.168.56.102:5555') # Genymotion, Nexus 4 w/Android 4.3
+
 task :default => [:clean, :build]
 
 desc "Cleans the project"
@@ -62,14 +68,6 @@ desc "Runs calabash-android"
 task :test_android => [:clean_screenshots] do
   mkdir './screenshots/' unless Dir.exists?('./screenshots/')
   set_env(:screenshot_path, './screenshots/')
-  set_env(:adb_device_arg, '192.168.56.101:5555') # Use the Genymotion AVD.
-  #set_env(:adb_device_arg, 'HT9CXP812164') # Nexus One
-  #set_env(:adb_device_arg, '0149B2EC03012005') # Galaxy Nexus
-  `calabash-android run ./bin/Release/CalabashExamples.Droid-Signed.apk --format html --out testresults.html ./features/listview.feature`
-end
-
-desc "Start the console"
-task :android_console do
-  set_env(:adb_device_arg, '192.168.56.101:5555') # Use the Genymotion AVD.
-  `calabash-android console ./Tasky.Android/bin/debug/com.xamarin.samples.taskydroid-Signed.apk`
+  # --format html --out testresults.html
+  `calabash-android run ./Tasky.Android/bin/Release/com.xamarin.samples.taskydroid-Signed.apk -p android ./features/add_new_task.feature`
 end
