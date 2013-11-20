@@ -1,0 +1,75 @@
+require 'albacore'
+require 'fileutils'
+require 'rubygems'
+require 'fileutils'
+
+# utility functions for manipulating environment variables
+def set_env(key, value)
+  if false == value
+    value = 'FALSE'
+  elsif true == value
+    value = 'TRUE'
+  end
+  ENV[key.to_s.upcase] = value
+end
+
+def get_env(key)
+  val = ENV[key.to_s.upcase]
+  if 'FALSE' == val
+    val = false
+  elsif 'TRUE' == val
+    val = true
+  end
+  val
+end
+
+task :default => [:clean, :build]
+
+desc "Cleans the project"
+task :clean => [:clean_screenshots] do
+  directories_to_delete = [
+      "./bin",
+      "./obj",
+      "./screenshots",
+      "./test_servers",
+      "./testresults.html"
+  ]
+
+  directories_to_delete.each { |x|
+    rm_rf x
+  }
+end
+
+desc "Delete the existing screen shots and calabash reports."
+task :clean_screenshots do
+  directories_to_delete = [
+      "./screenshots/",
+  ]
+
+  directories_to_delete.each { |directory|
+    rm_rf directory
+  }
+end
+
+desc "Compiles a debug version of the project."
+xbuild :build_android => [:clean] do |csproject|
+  csproject.solution = "./Tasky.Android/Tasky.Android.csproj"
+  csproject.properties = {:configuration => :release}
+  csproject.targets [:Clean, :Build, :SignAndroidPackage]
+end
+
+desc "Runs calabash-android"
+task :test_android => [:clean_screenshots] do
+  mkdir './screenshots/' unless Dir.exists?('./screenshots/')
+  set_env(:screenshot_path, './screenshots/')
+  set_env(:adb_device_arg, '192.168.56.101:5555') # Use the Genymotion AVD.
+  #set_env(:adb_device_arg, 'HT9CXP812164') # Nexus One
+  #set_env(:adb_device_arg, '0149B2EC03012005') # Galaxy Nexus
+  `calabash-android run ./bin/Release/CalabashExamples.Droid-Signed.apk --format html --out testresults.html ./features/listview.feature`
+end
+
+desc "Start the console"
+task :android_console do
+  set_env(:adb_device_arg, '192.168.56.101:5555') # Use the Genymotion AVD.
+  `calabash-android console ./Tasky.Android/bin/debug/com.xamarin.samples.taskydroid-Signed.apk`
+end
