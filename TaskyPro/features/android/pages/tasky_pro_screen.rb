@@ -4,7 +4,7 @@ class TaskyProScreen < Calabash::ABase
   include TaskyPro::AndroidHelpers
 
   def add_task_button
-    "button marked:'Add Task'"
+    trait
   end
 
   def tap_add_task_button
@@ -12,7 +12,7 @@ class TaskyProScreen < Calabash::ABase
   end
 
   def trait
-    "textview id:'title' marked:'TaskyPro'"
+    "button marked:'Add Task'"
   end
 
 end
