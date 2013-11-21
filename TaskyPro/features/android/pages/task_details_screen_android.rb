@@ -38,4 +38,13 @@ class TaskDetailsScreen < Calabash::ABase
 
   end
 
+  def mark_as_done
+    touch(done_checkbox)
+  end
+
+  def is_done?
+    query_results = query("#{done_checkbox} checked:true")
+    return !query_results.empty?
+  end
+
 end
