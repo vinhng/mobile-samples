@@ -64,10 +64,3 @@ xbuild :build_android => [:clean] do |csproject|
   csproject.targets [:Clean, :Build, :SignAndroidPackage]
 end
 
-desc "Runs calabash-android"
-task :test_android => [:clean_screenshots] do
-  mkdir './screenshots/' unless Dir.exists?('./screenshots/')
-  set_env(:screenshot_path, './screenshots/')
-  # --format html --out testresults.html
-  `calabash-android run ./Tasky.Android/bin/Release/com.xamarin.samples.taskydroid-Signed.apk -p android ./features/add_new_task.feature`
-end
