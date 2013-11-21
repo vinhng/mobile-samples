@@ -9,10 +9,16 @@ class TaskyProScreen < Calabash::ABase
 
   def tap_add_task_button
     touch(add_task_button)
+    page(TaskDetailsScreen).await
   end
 
   def trait
     "button marked:'Add Task'"
+  end
+
+  def should_have_in_list(task_name)
+    item = query("CheckedTextView marked:'#{task_name}'")
+    raise "Could not find #{task_name} in the ListView." unless item.any?
   end
 
 end
