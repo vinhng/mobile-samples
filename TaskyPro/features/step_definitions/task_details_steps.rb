@@ -38,7 +38,6 @@ end
 
 Given(/^I look at the details for the task "(.*?)"$/) do |task_name|
   @current_page = @current_page.select_task(task_name)
-
 end
 
 Then(/^I should see "(.*?)" for the note$/) do |arg1|
@@ -57,4 +56,18 @@ end
 
 Then(/^Done should be checked$/) do
   raise "This task should be marked as done." unless @current_page.is_done?
+end
+
+When(/^I start to add the "(.*?)" task$/) do |task_key|
+  task = TASKS[task_key.downcase.to_sym]
+  @current_page.enter_new_task(task)
+end
+
+When(/^I press the Cancel button$/) do
+  @current_page.tap_cancel_button
+  @current_page = page(TaskyProScreen).await
+end
+
+Then(/^I should not see the "(.*?)" task in the list$/) do |arg1|
+  element_exists("edittext marked:'#{arg1}'")
 end

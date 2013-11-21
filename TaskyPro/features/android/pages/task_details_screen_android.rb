@@ -27,10 +27,14 @@ class TaskDetailsScreen < Calabash::ABase
     "checkbox marked:'Done'"
   end
 
-  def add_new_task(new_task)
-
+  def enter_new_task(new_task)
     enter_text(name_field, new_task[:name])
     enter_text(notes_field, new_task[:notes])
+  end
+
+  def add_new_task(new_task)
+
+    enter_new_task(new_task)
 
     touch(save_button)
 
@@ -45,6 +49,10 @@ class TaskDetailsScreen < Calabash::ABase
   def is_done?
     query_results = query("#{done_checkbox} checked:true")
     return !query_results.empty?
+  end
+
+  def tap_cancel_button
+    touch(cancel_button)
   end
 
 end
