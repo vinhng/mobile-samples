@@ -29,3 +29,32 @@ Then(/^I should see the "(.*?)" task in the list$/) do |task_name|
   @current_page.should_have_in_list(task_name)
 end
 
+When(/^I change the note to "(.*?)"$/) do |new_note|
+  enter_text(@current_page.notes_field, new_note)
+  touch(@current_page.save_button)
+
+  @current_page = page(TaskyProScreen).await
+end
+
+Given(/^I look at the details for the task "(.*?)"$/) do |task_name|
+  @current_page = @current_page.select_task(task_name)
+
+end
+
+Then(/^I should see "(.*?)" for the note$/) do |arg1|
+  element_exists("edittext marked:'#{arg1}'")
+end
+
+When(/^I mark the task as Done and save it$/) do
+  @current_page.mark_as_done
+  touch(@current_page.save_button)
+  @current_page = page(TaskyProScreen).await
+end
+
+Then(/^the task "(.*?)" should be checked$/) do |arg1|
+  @current_page.is_checked(arg1)
+end
+
+Then(/^Done should be checked$/) do
+  raise "This task should be marked as done." unless @current_page.is_done?
+end

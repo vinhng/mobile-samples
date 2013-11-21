@@ -26,4 +26,9 @@ class TaskyProScreen < Calabash::ABase
     page(TaskDetailsScreen).await
   end
 
+  def is_checked(task_name)
+    item = query("CheckedTextView marked:'#{task_name}'", "isChecked")
+    raise "Task #{task_name} is not checked, and it should be." unless item[0]
+  end
+
 end
