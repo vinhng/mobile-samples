@@ -1,8 +1,7 @@
 Feature: Edit an existing task
 
   Background:
-    Given I am on the Task Details screen
-    And I already have the task "LearnObjectiveC"
+    Given I am on the Task Details screen for the "LearnObjectiveC" task
 
   Scenario: Change the task name
     The user should be able to change the name of task.
