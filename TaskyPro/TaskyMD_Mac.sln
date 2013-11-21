@@ -86,7 +86,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Tasky.Android\Tasky.Android.csproj
+		StartupItem = Tasky.iOS\Tasky.iOS.csproj
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = TaskyVS.vsmdi

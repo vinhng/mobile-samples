@@ -57,10 +57,16 @@ task :clean_screenshots do
   }
 end
 
-desc "Compiles a debug version of the project."
+desc "Compiles a Release version of the project for Android."
 xbuild :build_android => [:clean] do |csproject|
   csproject.solution = "./Tasky.Android/Tasky.Android.csproj"
   csproject.properties = {:configuration => :release}
   csproject.targets [:Clean, :Build, :SignAndroidPackage]
 end
 
+desc "Compiles the project for iOS"
+task :build_ios => [:clean] do
+  `/Applications/Xamarin\\ Studio.app/Contents/MacOS/mdtool -v build "--configuration:Debug|iPhone" TaskyMD_Mac.sln`
+  `/Applications/Xamarin\\ Studio.app/Contents/MacOS/mdtool -v build "--configuration:Debug|iPhoneSimulator" TaskyMD_Mac.sln`
+
+end

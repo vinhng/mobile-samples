@@ -5,8 +5,7 @@ end
 
 Given(/^I already have the task "(.*?)"$/) do |task_key|
   task = TASKS[task_key.downcase.to_sym]
-
-  @current_page = @current_page.add_new_task(task)
+  @current_page = @current_page.add_new_task(task) unless @current_page.has_in_list?(task[:name])
   @current_page = @current_page.select_task(task[:name])
 end
 
@@ -26,7 +25,7 @@ Then(/^I should be on the TaskyPro screen$/) do
 end
 
 Then(/^I should see the "(.*?)" task in the list$/) do |task_name|
-  @current_page.should_have_in_list(task_name)
+  @current_page.assert_should_have_in_list(task_name)
 end
 
 When(/^I change the note to "(.*?)"$/) do |new_note|
