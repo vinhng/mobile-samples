@@ -20,13 +20,13 @@ class TaskyProScreen < Calabash::IBase
     "label marked:'#{task_name}'"
   end
 
-  def has_in_list?(task_name)
+  def has_in_list(task_name)
     item = query(task_label(task_name))
     item.any?
   end
 
   def assert_should_have_in_list(task_name)
-    raise "Could not find #{task_name} in the TableView." unless has_in_list?(task_name)
+    raise "Could not find #{task_name} in the TableView." unless has_in_list(task_name)
   end
 
   def select_task(task_name)
@@ -40,7 +40,7 @@ class TaskyProScreen < Calabash::IBase
   end
 
   def delete_task(task_name)
-    if has_in_list?(task_name)
+    if has_in_list(task_name)
       touch(task_label(task_name))
       details_page = page(TaskDetailsScreen).await
       touch(details_page.delete_button)
