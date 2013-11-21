@@ -16,25 +16,26 @@ class TaskDetailsScreen < Calabash::ABase
   end
 
   def save_button
-    "button marked:'Save'"
+    trait
   end
 
   def trait
-    "button marked:'Add Task'"
+    "button marked:'Save'"
   end
 
   def done_checkbox
     "checkbox marked:'Done'"
   end
 
-  def create_task(name, note)
-    enter_text(name_field, note[:name])
-    enter_text(notes_field, note[:notes])
+  def add_new_task(new_task)
+
+    enter_text(name_field, new_task[:name])
+    enter_text(notes_field, new_task[:notes])
+
     touch(save_button)
 
-    assignments = page(TaskyProScreen)
+    page(TaskyProScreen).await()
 
   end
-
 
 end
