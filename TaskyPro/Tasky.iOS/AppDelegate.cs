@@ -43,6 +43,10 @@ namespace Tasky {
 			navController.PushViewController(homeViewController, false);
 			window.RootViewController = navController;
 			window.MakeKeyAndVisible ();
+
+			#if DEBUG
+			Xamarin.Calabash.Start();
+			#endif 
 			
 			return true;
 		}

@@ -61,6 +61,9 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
+    <Reference Include="Calabash">
+      <HintPath>..\Components\calabash-1.4\lib\ios\Calabash.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -134,5 +137,12 @@
     <BundleResource Include="Resources\icon-58.png" />
     <BundleResource Include="Resources\icon-72.png" />
     <BundleResource Include="Resources\icon-114.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <XamarinComponentReference Include="calabash">
+      <InstallationInProgress>True</InstallationInProgress>
+      <Version>1.4</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
   </ItemGroup>
 </Project>
