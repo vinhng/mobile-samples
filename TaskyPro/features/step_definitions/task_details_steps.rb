@@ -2,12 +2,12 @@ Given(/^I am on the Task Details screen$/) do
   tasks_page = page(TaskyProScreen).await
   @current_page = tasks_page.tap_add_task_button
 end
-
-Given(/^I already have the task "(.*?)"$/) do |task_key|
-  task = TASKS[task_key.downcase.to_sym]
-  @current_page = @current_page.add_new_task(task) unless @current_page.has_in_list?(task[:name])
-  @current_page = @current_page.select_task(task[:name])
-end
+#
+#Given(/^I already have the task "(.*?)"$/) do |task_key|
+#  task = TASKS[task_key.downcase.to_sym]
+#  @current_page = @current_page.add_new_task(task) unless @current_page.has_in_list(task[:name])
+#  @current_page = @current_page.select_task(task[:name])
+#end
 
 When(/^I change the name to "(.*?)"$/) do |new_name|
   enter_text(@current_page.name_field, new_name)
@@ -69,4 +69,15 @@ end
 
 Then(/^I should not see the "(.*?)" task in the list$/) do |arg1|
   element_exists("edittext marked:'#{arg1}'")
+end
+
+Given(/^I am on the Task Details screen for the "(.*?)" task$/) do |task_key|
+  task = TASKS[task_key.downcase.to_sym]
+  task_list = page(TaskyProScreen).await
+  if (!task_list.has_in_list(task[:name]))
+    @current_page = task_list.tap_add_task_button
+    @current_page = @current_page.add_new_task(task)
+  end
+
+  @current_page = @current_page.select_task(task[:name])
 end
