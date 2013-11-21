@@ -21,4 +21,9 @@ class TaskyProScreen < Calabash::ABase
     raise "Could not find #{task_name} in the ListView." unless item.any?
   end
 
+  def select_task(task_name)
+    touch("CheckedTextView marked:'#{task_name}'")
+    page(TaskDetailsScreen).await
+  end
+
 end
