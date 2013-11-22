@@ -7,9 +7,9 @@ Given(/^I am on the Task Details screen for the "(.*?)" task$/) do |task_key|
   task = TASKS[task_key.downcase.to_sym]
   task_list = page(TaskyProScreen).await
 
-  puts(task_list)
-
-  if (!task_list.has_in_list(task[:name]))
+  if (task_list.has_in_list(task[:name]))
+    @current_page = task_list
+  else
     @current_page = task_list.tap_add_task_button
     @current_page = @current_page.add_new_task(task)
   end
@@ -34,12 +34,12 @@ Then(/^I should see the "(.*?)" task in the list$/) do |task_name|
   @current_page.assert_should_have_in_list(task_name)
 end
 
-Then(/^I should see "(.*?)" for the note$/) do |arg1|
-  element_exists("edittext marked:'#{arg1}'")
+Then(/^I should see "(.*?)" for the note$/) do |task_note|
+  element_exists("edittext marked:'#{task_note}'")
 end
 
-Then(/^the task "(.*?)" should be checked$/) do |arg1|
-  @current_page.is_checked(arg1)
+Then(/^the task "(.*?)" should be checked$/) do |task_name|
+  @current_page.is_checked(task_name)
 end
 
 Then(/^Done should be checked$/) do

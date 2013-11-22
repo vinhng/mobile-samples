@@ -28,6 +28,7 @@ class TaskyProScreen < Calabash::ABase
   def task_label(task_name)
     "CheckedTextView marked:'#{task_name}'"
   end
+
   def select_task(task_name)
     touch(task_label(task_name))
     page(TaskDetailsScreen).await

@@ -12,8 +12,7 @@ Feature: Edit an existing task
     And I should see the "Learn iOS programming" task in the list
 
   Scenario: Mark the task as done
-    The user should be able to mark all of their completed tasks as done. When a task is
-    "done", it should have a check mark beside it in the list view.
+    The user should be able to mark all of their completed tasks as done.
 
     When I mark the task as Done and save it
     Then the task "Learn Objective-C" should be checked

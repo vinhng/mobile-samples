@@ -37,13 +37,9 @@ class TaskDetailsScreen < Calabash::ABase
   end
 
   def add_new_task(new_task)
-
     enter_new_task(new_task)
-
     touch(save_button)
-
     page(TaskyProScreen).await()
-
   end
 
   def mark_as_done
