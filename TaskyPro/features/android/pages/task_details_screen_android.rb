@@ -15,6 +15,10 @@ class TaskDetailsScreen < Calabash::ABase
     "button marked:'Cancel'"
   end
 
+  def delete_button
+    "button marked:'Delete'"
+  end
+
   def save_button
     trait
   end
@@ -53,6 +57,10 @@ class TaskDetailsScreen < Calabash::ABase
 
   def tap_cancel_button
     touch(cancel_button)
+  end
+
+  def tap_delete_button
+    touch(delete_button)
   end
 
 end

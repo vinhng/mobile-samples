@@ -16,13 +16,13 @@ class TaskyProScreen < Calabash::ABase
     "button marked:'Add Task'"
   end
 
-  def has_in_list?(task_name)
+  def has_in_list(task_name)
     item = query(task_label(task_name))
     item.any?
   end
 
   def assert_should_have_in_list(task_name)
-    raise "Could not find #{task_name} in the TableView." unless has_in_list?(task_name)
+    raise "Could not find #{task_name} in the TableView." unless has_in_list(task_name)
   end
 
   def task_label(task_name)

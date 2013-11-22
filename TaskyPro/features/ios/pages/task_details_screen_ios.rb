@@ -12,6 +12,10 @@ class TaskDetailsScreen < Calabash::IBase
   end
 
   def cancel_button
+    "label marked:'Cancel'"
+  end
+
+  def delete_button
     "label marked:'Delete'"
   end
 
@@ -51,5 +55,9 @@ class TaskDetailsScreen < Calabash::IBase
 
   def tap_cancel_button
     touch(cancel_button)
+  end
+
+  def tap_delete_button
+    touch(delete_button)
   end
 end
