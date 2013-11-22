@@ -43,7 +43,7 @@ Then(/^the task "(.*?)" should be checked$/) do |task_name|
 end
 
 Then(/^Done should be checked$/) do
-  raise "This task should be marked as done." unless @current_page.is_done?
+  fail(msg="This task should be marked as done.") unless @current_page.is_done?
 end
 
 When(/^I start to add the "(.*?)" task$/) do |task_key|

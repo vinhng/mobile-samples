@@ -12,7 +12,7 @@ class TaskDetailsScreen < Calabash::IBase
   end
 
   def cancel_button
-    "label marked:'Cancel'"
+    "label marked:'Delete'"
   end
 
   def delete_button
@@ -32,16 +32,16 @@ class TaskDetailsScreen < Calabash::IBase
   end
 
   def enter_new_task(new_task)
+    clear_text(name_field)
     enter_text(name_field, new_task[:name])
+    clear_text(notes_field)
     enter_text(notes_field, new_task[:notes])
   end
 
   def add_new_task(new_task)
-
     enter_new_task(new_task)
     touch(save_button)
     page(TaskyProScreen).await
-
   end
 
   def mark_as_done
@@ -49,7 +49,7 @@ class TaskDetailsScreen < Calabash::IBase
   end
 
   def is_done?
-    query_results = query(query("switch", "isOn"))
+    query_results = query("switch", "isOn")
     return query_results[0] == "1"
   end
 
