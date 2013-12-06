@@ -31,6 +31,19 @@ class TaskDetailsScreen < Calabash::IBase
     "switch"
   end
 
+  def change_name(new_name)
+    clear_text(name_field)
+    enter_text(name_field, new_name)
+    touch(save_button)
+  end
+
+  def change_note(new_note)
+    clear_text(name_field)
+    enter_text(notes_field, new_note)
+    touch(save_button)
+  end
+
+
   def enter_new_task(new_task)
     clear_text(name_field)
     enter_text(name_field, new_task[:name])
@@ -46,6 +59,7 @@ class TaskDetailsScreen < Calabash::IBase
 
   def mark_as_done
     touch(done_checkbox)
+    touch(save_button)
   end
 
   def is_done?

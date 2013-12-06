@@ -31,6 +31,18 @@ class TaskDetailsScreen < Calabash::ABase
     "checkbox marked:'Done'"
   end
 
+  def change_name(new_name)
+    clear_text(name_field)
+    enter_text(name_field, new_name)
+    touch(save_button)
+  end
+
+  def change_note(new_note)
+    clear_text(name_field)
+    enter_text(notes_field, new_note)
+    touch(save_button)
+  end
+
   def enter_new_task(new_task)
     enter_text(name_field, new_task[:name])
     enter_text(notes_field, new_task[:notes])
@@ -44,6 +56,7 @@ class TaskDetailsScreen < Calabash::ABase
 
   def mark_as_done
     touch(done_checkbox)
+    touch(save_button)
   end
 
   def is_done?
