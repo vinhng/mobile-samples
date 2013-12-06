@@ -1,4 +1,4 @@
-if ENV['PLATFORM'] == 'ios6'
+if ENV['PLATFORM'] == 'ios'
   require 'calabash-cucumber/cucumber'
 elsif ENV['PLATFORM'] == 'android'
   require 'calabash-android/cucumber'
