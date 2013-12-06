@@ -47,7 +47,6 @@
     <ConsolePause>False</ConsolePause>
     <MtouchDebug>True</MtouchDebug>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <NoStdLib>True</NoStdLib>
     <BuildIpa>true</BuildIpa>
     <IpaPackageName>
     </IpaPackageName>
