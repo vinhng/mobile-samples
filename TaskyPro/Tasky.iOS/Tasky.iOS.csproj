@@ -73,7 +73,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Calabash">
-      <HintPath>..\Components\calabash-1.4\lib\ios\Calabash.dll</HintPath>
+      <HintPath>..\Components\calabash-1.5\lib\ios\Calabash.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -151,7 +151,8 @@
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="calabash">
-      <Version>1.4</Version>
+      <InstallationInProgress>True</InstallationInProgress>
+      <Version>1.5</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
